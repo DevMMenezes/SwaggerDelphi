@@ -1,0 +1,24 @@
+unit Router.Default;
+
+interface
+
+uses
+  Horse;
+
+procedure LoadRouters;
+procedure pGetDefault;
+
+implementation
+
+procedure LoadRouters;
+begin
+  THorse.Get('/', pGetDefault);
+end;
+
+procedure pGetDefault(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+begin
+  Res.Send<String>('API Horse 1.0').Status(200);
+
+end;
+
+end.

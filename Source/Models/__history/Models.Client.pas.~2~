@@ -1,0 +1,13 @@
+unit Models.Client;
+
+interface
+
+type
+  TModelsClient = class
+  private
+  public
+  end;
+
+implementation
+
+end.

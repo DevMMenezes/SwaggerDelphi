@@ -1,0 +1,35 @@
+unit Router.Default;
+
+interface
+
+uses
+  Horse, Utils;
+
+procedure LoadRouters;
+procedure pGetDefault(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+
+implementation
+
+procedure LoadRouters;
+begin
+  THorse.Get('/', pGetDefault);
+end;
+
+procedure pGetDefault(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+begin
+
+  Res.Send('API Horse v' + GetFileVersionUtils(ParamStr(0))).Status(200);
+  doPrintLog('Consultando Rota Inicial.');
+
+end;
+
+initialization
+
+Swagger.BasePath('v1').Register.Response(204).Description('No Content')
+  .&End.Response(400).Description('Bad Request').Schema(TApiError)
+  .&End.Response(404).Description('Not Found').Schema(TApiError)
+  .&End.Response(500).Description('Internal Server Error').Schema(TApiError)
+  .&End.&End.Info.Title('Swagger Petstore').Contact.Name('contactName')
+  .Email('contact@email.com').&End.&End.&End;
+
+end.
